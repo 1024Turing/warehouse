@@ -1,2 +1,0 @@
- 权限管理的流程:
- 用user表里的user_code和password登录,然后判断stuff表里有没有这个user.判断是否在职.
