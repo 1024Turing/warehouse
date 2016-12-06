@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.zhuang.warehouse.domain.Staff" table="staff">
+		<id name="stf_id" column="stf_id">
+			<generator class="assigned"/>
+		</id>
+		<property name="stf_name" />
+		<property name="stf_gender" />
+		<property name="stf_birth" />
+		<property name="stf_phone" />
+		<property name="stf_email" />
+		<property name="dept" />
+		<property name="position" />
+		<property name="pst" />
+		<property name="id_card" />
+	</class>
+<!-- 	 <query name="dept.delete">
+    	UPDATE Department 
+    </query> -->
+</hibernate-mapping>

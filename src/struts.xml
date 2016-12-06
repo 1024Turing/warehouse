@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 指定struts中的Action对象由spring工厂负责创建 -->
+	<constant name="struts.objectFactory" value="spring"/>
+	<package name="warehouse" extends="struts-default" namespace="/">
+		<!--定义权限拦截器  -->
+		<interceptors>
+			<!-- 注册自定义拦截器 -->
+			<interceptor name="LoginInterceptor" class="com.zhuang.warehouse.web.interceptor.LoginInterceptor">
+				<param name="excludeMethods">login</param>
+			</interceptor>
+			<!-- 自定义一个栈 -->
+			<interceptor-stack name="StoreStack">
+				<interceptor-ref name="LoginInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>			
+			</interceptor-stack>
+		</interceptors>
+		<!-- 将自定义的栈指定为默认栈 -->
+		 <default-interceptor-ref name="StoreStack" />
+			<!--设置全局变量  -->
+		<global-results>
+			<result name="input">/error.jsp</result>
+			<result name="login">/login.jsp</result>
+		</global-results>
+		<!-- 	需要进行权限控制的页面访问 -->
+		<action name="page_*_*">
+			<result type="dispatcher">/WEB-INF/pages/{1}/{2}.jsp</result>
+		</action>
+		<action name="indexAction_*" class="indexAction" method="{1}">
+		</action>
+
+		<action name="deptAction_*" class="deptAction" method="{1}">
+			<result name="input" >/validatecode.jsp</result>
+			<result name="list" >/WEB-INF/pages/base/dept.jsp</result>
+		</action>
+		<action name="gcodAction_*" class="gcodAction" method="{1}">
+			<result name="list" >/WEB-INF/pages/base/gcod.jsp</result>
+		</action>
+		<action name="staffAction_*" class="staffAction" method="{1}">
+			<result name="list" >/WEB-INF/pages/base/staff.jsp</result>
+		</action>
+		<action name="positionAction_*" class="positionAction" method="{1}">
+			<result name="list" >/WEB-INF/pages/base/position.jsp</result>
+		</action>
+		<action name="personstAction_*" class="personstAction" method="{1}">
+			<result name="list" >/WEB-INF/pages/base/personst.jsp</result>
+		</action>
+		<action name="inputAction_*" class="inputAction" method="{1}">
+			<result name="init" type="redirectAction">page_store_init.action</result>
+			<result name="inApe" >/WEB-INF/pages/store/inApe.jsp</result>
+			<result name="inlist" type="redirectAction">page_store_inlist.action</result>
+		</action>
+		<action name="recordsAction_*" class="recordsAction" method="{1}">
+			<result name="list" >/list.jsp</result>
+		</action>
+		<action name="applyAction_*" class="applyAction" method="{1}">
+			<result name="message" >/WEB-INF/pages/apply/msg.jsp</result>
+			<result name="applyApe" >/WEB-INF/pages/apply/applyApe.jsp</result>
+			<result name="applyinfo" >/WEB-INF/pages/apply/applyinfo.jsp</result>
+			<result name="mylist" type="redirectAction">page_apply_mylist.action</result>
+			<result name="list" type="redirectAction">page_apply_list.action</result>
+			<result name="outApe" >/WEB-INF/pages/store/outApe.jsp</result>
+		</action>
+		<action name="outputAction_*" class="outputAction" method="{1}">
+			<result name="msg" >/WEB-INF/pages/store/msg.jsp</result>
+		</action>
+		<action name="itemAction_*" class="itemAction" method="{1}">
+			<result name="list" >/WEB-INF/pages/store/items.jsp</result>
+		</action>
+		<action name="buyAction_*" class="buyAction" method="{1}">
+			<result name="list" type="redirectAction">page_buy_buylist.action</result>
+			<result name="buyinfo" >/WEB-INF/pages/buy/buyinfo.jsp</result>	
+		</action>
+		<action name="firstApeAction_*" class="firstApeAction" method="{1}">
+			<result name="list" type="redirectAction">page_buy_falist.action</result>
+			<result name="fainfo">/WEB-INF/pages/buy/fainfo.jsp</result>	
+		</action>
+		<action name="secondApeAction_*" class="secondApeAction" method="{1}">
+			 <result name="list" type="redirectAction">page_buy_salist.action</result>
+			<result name="sainfo">/WEB-INF/pages/buy/sainfo.jsp</result>	
+		</action>
+		<action name="pactAction_*" class="pactAction" method="{1}">
+			<result name="list" type="redirectAction">page_buy_pactlist.action</result>
+			<result name="pactinfo">/WEB-INF/pages/buy/pactinfo.jsp</result>	
+		</action>
+		<action name="checkAction_*" class="checkAction" method="{1}">
+			<result name="list" type="redirectAction">page_buy_chelist.action</result> 
+			<result name="cheinfo">/WEB-INF/pages/buy/cheinfo.jsp</result>	
+		</action>
+		<action name="userAction_*" class="userAction" method="{1}">
+			<result name="login">/login.jsp</result>
+			<result name="home">/index.jsp</result>
+			<result name="list">/WEB-INF/pages/admin/user.jsp</result>
+			
+		</action>
+		<action name="roleAction_*" class="roleAction" method="{1}">
+			<result name="list">/WEB-INF/pages/admin/role.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/role_edit.jsp</result>
+		</action>
+	
+	</package>
+</struts>

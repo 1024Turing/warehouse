@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.zhuang.warehouse.domain.Personstate" table="personstate">
+		<id name="pst_id" column="pst_id">
+			<generator class="uuid"/>
+		</id>
+		<property name="pst_state" />
+	</class>
+
+</hibernate-mapping>
